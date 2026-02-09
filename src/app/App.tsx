@@ -1,10 +1,12 @@
 import { MessageCircle, Menu, X } from 'lucide-react';
-import { motion, useScroll, useTransform } from 'motion/react';
+import { motion, useScroll } from 'framer-motion';
 import { useState } from 'react';
 
 import { CustomCursor } from '@/app/components/CustomCursor';
 
 import { TTTTInteractive } from '@/app/components/TTTTInteractive';
+import clocktowerImage from '@/assets/clocktower.png';
+import palmImage from '@/assets/palm.png';
 
 
 // SVG Icons for buttons
@@ -169,10 +171,15 @@ export default function App() {
         id="home"
         className="relative pt-24 sm:pt-28 md:pt-32 pb-16 sm:pb-24 md:pb-32 px-4 sm:px-6 md:px-8 overflow-hidden min-h-screen flex items-center"
       >
-        {/* Gooey Interactive Background */}
+        {/* Hero Section Images and Content */}
+        <div className="max-w-7xl mx-auto relative z-20 w-full flex items-center justify-between">
+          {/* Left Image: Clocktower */}
+          <div className="hidden md:block absolute left-0 bottom-0 z-10 h-full flex items-end">
+            <img src={clocktowerImage} alt="Clocktower" className="h-[420px] md:h-[520px] lg:h-[600px] xl:h-[700px] object-contain select-none pointer-events-none" draggable="false" />
+          </div>
 
-        <div className="max-w-7xl mx-auto relative z-20 w-full">
-          <div className="text-center mb-8 sm:mb-12 md:mb-16">
+          {/* Center Content */}
+          <div className="flex-1 text-center mb-8 sm:mb-12 md:mb-16 relative z-20">
             {/* Main Headline - Split into two parts */}
             <motion.h1
               className="text-5xl sm:text-7xl md:text-8xl lg:text-[10rem] xl:text-[12rem] font-black mb-4 sm:mb-6 md:mb-8 leading-[1.1] px-2"
@@ -237,6 +244,11 @@ export default function App() {
                 📞 CALL US
               </motion.a>
             </motion.div>
+          </div>
+
+          {/* Right Image: Palm Trees */}
+          <div className="hidden md:block absolute right-0 bottom-0 z-10 h-full flex items-end">
+            <img src={palmImage} alt="Palm Trees" className="h-[320px] md:h-[420px] lg:h-[500px] xl:h-[600px] object-contain select-none pointer-events-none" draggable="false" />
           </div>
         </div>
       </section>
