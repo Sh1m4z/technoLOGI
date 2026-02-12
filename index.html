@@ -53,13 +53,11 @@
             width: 32px;
             height: 32px;
             border-radius: 50%;
-            border: 2px solid white;
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(4px);
+            border: 2px solid #000;   /* changed */
+            background: rgba(0,0,0,0.15);
             pointer-events: none;
             z-index: 9999;
             transform: translate(-50%, -50%);
-            mix-blend-mode: difference;
             transition: transform 0.15s ease-out, width 0.2s, height 0.2s;
         }
 
@@ -68,12 +66,10 @@
             width: 6px;
             height: 6px;
             border-radius: 50%;
-            background: white;
+            background: #000;   /* changed */
             pointer-events: none;
             z-index: 9999;
             transform: translate(-50%, -50%);
-            mix-blend-mode: difference;
-            transition: transform 0.15s ease-out;
         }
 
         .cursor-hover #cursor-main {
@@ -974,7 +970,7 @@
             <div class="flex flex-col items-center justify-center space-y-6">
             <!-- Logo -->
             <div class="flex items-center">
-                <img src="logo.png" alt="TechnoLOGI Logo" class="h-10 sm:h-12 w-auto object-contain">
+                <img src="logo2.png" alt="TechnoLOGI Logo" class="h-10 sm:h-12 w-auto object-contain">
             </div>
 
 
@@ -1010,18 +1006,30 @@
             mouseY = e.clientY;
         });
 
-        function animateCursor() {
-            const speed = 0.15;
+    function animateCursor() {
+        const speed = 0.15;
 
-            cursorX += (mouseX - cursorX) * speed;
-            cursorY += (mouseY - cursorY) * speed;
+        cursorX += (mouseX - cursorX) * speed;
+        cursorY += (mouseY - cursorY) * speed;
 
-            if (cursorGlow) cursorGlow.style.transform = `translate(${cursorX}px, ${cursorY}px)`;
-            if (cursorMain) cursorMain.style.transform = `translate(${cursorX}px, ${cursorY}px)`;
-            if (cursorDot) cursorDot.style.transform = `translate(${cursorX}px, ${cursorY}px)`;
-
-            requestAnimationFrame(animateCursor);
+        if (cursorGlow) {
+            cursorGlow.style.left = cursorX + "px";
+            cursorGlow.style.top = cursorY + "px";
         }
+
+        if (cursorMain) {
+            cursorMain.style.left = cursorX + "px";
+            cursorMain.style.top = cursorY + "px";
+        }
+
+        if (cursorDot) {
+            cursorDot.style.left = cursorX + "px";
+            cursorDot.style.top = cursorY + "px";
+        }
+
+        requestAnimationFrame(animateCursor);
+    }
+
         animateCursor();
 
         document.addEventListener('mousedown', () => body.classList.add('cursor-click'));

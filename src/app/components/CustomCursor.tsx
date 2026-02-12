@@ -1,104 +1,100 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from "react";
 
 export function CustomCursor() {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const ringRef = useRef<HTMLDivElement>(null);
+  const dotRef = useRef<HTMLDivElement>(null);
+  const glowRef = useRef<HTMLDivElement>(null);
+
+  const mouse = useRef({ x: -100, y: -100 });
+  const smooth = useRef({ x: -100, y: -100 });
+
   const [isHovering, setIsHovering] = useState(false);
   const [isClicking, setIsClicking] = useState(false);
+  const [enabled, setEnabled] = useState(false);
 
   useEffect(() => {
-    // Only enable custom cursor on desktop
     if (window.innerWidth <= 1024) return;
+    setEnabled(true);
 
-    const handleMouseMove = (e: MouseEvent) => {
-      setPosition({ x: e.clientX, y: e.clientY });
+    const move = (e: MouseEvent) => {
+      mouse.current.x = e.clientX;
+      mouse.current.y = e.clientY;
     };
 
-    const handleMouseDown = () => setIsClicking(true);
-    const handleMouseUp = () => setIsClicking(false);
+    const down = () => setIsClicking(true);
+    const up = () => setIsClicking(false);
 
-    const handleMouseEnter = (e: Event) => {
-      const target = e.target;
-      // Check if target is an Element before using closest
-      if (target instanceof Element) {
-        if (target.tagName === 'A' || target.tagName === 'BUTTON' || target.closest('a') || target.closest('button')) {
-          setIsHovering(true);
-        }
-      }
+    const over = (e: any) => {
+      if (e.target.closest("a,button,[role='button']")) setIsHovering(true);
     };
 
-    const handleMouseLeave = (e: Event) => {
-      const target = e.target;
-      // Check if target is an Element before using closest
-      if (target instanceof Element) {
-        if (target.tagName === 'A' || target.tagName === 'BUTTON' || target.closest('a') || target.closest('button')) {
-          setIsHovering(false);
-        }
-      }
+    const out = (e: any) => {
+      if (e.target.closest("a,button,[role='button']")) setIsHovering(false);
     };
 
-    document.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('mousedown', handleMouseDown);
-    document.addEventListener('mouseup', handleMouseUp);
-    document.addEventListener('mouseenter', handleMouseEnter, true);
-    document.addEventListener('mouseleave', handleMouseLeave, true);
+    document.addEventListener("mousemove", move);
+    document.addEventListener("mousedown", down);
+    document.addEventListener("mouseup", up);
+    document.addEventListener("mouseover", over);
+    document.addEventListener("mouseout", out);
+
+    document.body.classList.add("custom-cursor-page");
+
+    // 🔥 Smooth animation loop
+    const animate = () => {
+      smooth.current.x += (mouse.current.x - smooth.current.x) * 0.15;
+      smooth.current.y += (mouse.current.y - smooth.current.y) * 0.15;
+
+      const transform = `translate(${smooth.current.x}px, ${smooth.current.y}px) translate(-50%, -50%)`;
+
+      if (ringRef.current) ringRef.current.style.transform = transform;
+      if (dotRef.current) dotRef.current.style.transform = transform;
+      if (glowRef.current) glowRef.current.style.transform = transform;
+
+      requestAnimationFrame(animate);
+    };
+
+    animate();
 
     return () => {
-      document.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mousedown', handleMouseDown);
-      document.removeEventListener('mouseup', handleMouseUp);
-      document.removeEventListener('mouseenter', handleMouseEnter, true);
-      document.removeEventListener('mouseleave', handleMouseLeave, true);
+      document.removeEventListener("mousemove", move);
+      document.removeEventListener("mousedown", down);
+      document.removeEventListener("mouseup", up);
+      document.removeEventListener("mouseover", over);
+      document.removeEventListener("mouseout", out);
+      document.body.classList.remove("custom-cursor-page");
     };
   }, []);
 
-  // Hide on mobile
-  if (typeof window !== 'undefined' && window.innerWidth <= 1024) {
-    return null;
-  }
+  if (!enabled) return null;
 
   return (
     <>
       {/* Glow */}
       <div
-        className="fixed w-64 h-64 rounded-full bg-white/20 blur-[60px] pointer-events-none z-[9998] transition-transform duration-150 ease-out"
-        style={{
-          left: `${position.x}px`,
-          top: `${position.y}px`,
-          transform: 'translate(-50%, -50%)',
-        }}
+        ref={glowRef}
+        className="fixed w-56 h-56 rounded-full bg-black/20 blur-[50px] pointer-events-none z-[9998]"
       />
-      
-      {/* Main Ring */}
+
+      {/* Ring */}
       <div
-        className={`fixed rounded-full border-2 border-white bg-white/20 backdrop-blur-sm pointer-events-none z-[9999] transition-all duration-150 ease-out ${
-          isClicking ? 'w-5 h-5' : isHovering ? 'w-12 h-12' : 'w-8 h-8'
-        }`}
-        style={{
-          left: `${position.x}px`,
-          top: `${position.y}px`,
-          transform: 'translate(-50%, -50%)',
-          mixBlendMode: 'difference',
-        }}
+        ref={ringRef}
+        className={`fixed rounded-full border-2 border-black pointer-events-none z-[9999] transition-all duration-150
+        ${isClicking ? "w-5 h-5" : isHovering ? "w-12 h-12" : "w-8 h-8"}`}
       />
-      
-      {/* Center Dot */}
+
+      {/* Dot */}
       <div
-        className="fixed w-1.5 h-1.5 rounded-full bg-white pointer-events-none z-[9999] transition-transform duration-150 ease-out"
-        style={{
-          left: `${position.x}px`,
-          top: `${position.y}px`,
-          transform: 'translate(-50%, -50%)',
-          mixBlendMode: 'difference',
-        }}
+        ref={dotRef}
+        className="fixed w-2 h-2 rounded-full bg-black pointer-events-none z-[9999]"
       />
 
       <style>{`
-        .custom-cursor-page {
-          cursor: none !important;
-        }
+        .custom-cursor-page,
         .custom-cursor-page * {
           cursor: none !important;
         }
+
         @media (max-width: 1024px) {
           .custom-cursor-page,
           .custom-cursor-page * {
