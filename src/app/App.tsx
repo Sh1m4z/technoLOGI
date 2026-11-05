@@ -1,4 +1,4 @@
-import { MessageCircle, Menu, X } from 'lucide-react';
+import { MessageCircle, Menu, X, Globe, ShoppingCart, Check, Sparkles, Film, Palette, Monitor, Search, PhoneCall } from 'lucide-react';
 import { motion, useScroll } from 'framer-motion';
 import { useState } from 'react';
 
@@ -11,6 +11,19 @@ import palmImage from '@/assets/palm.png';
 
 // SVG Icons for buttons
 import logoImage from '@/assets/cf2efb8d84b173b37e2e50c31e24a8466857a35d.png';
+
+// Exact 3D and graphic icons matching user uploaded design
+import globeIconImg from '@/assets/icons/user_globe.png';
+import whatsappIconImg from '@/assets/icons/user_whatsapp.png';
+import phoneIconImg from '@/assets/icons/user_phone.png';
+import searchIconImg from '@/assets/icons/user_search.png';
+import videoIconImg from '@/assets/icons/user_clapper.png';
+import starsIconImg from '@/assets/icons/user_stars.png';
+
+// Work section logos
+import workTopgearImg from '@/assets/icons/work_topgear.png';
+import workD24Img from '@/assets/icons/work_d24.png';
+import workSrgroupImg from '@/assets/icons/work_srgroup.png';
 
 
 const PhoneIcon = () => (
@@ -25,9 +38,231 @@ const WhatsAppIcon = () => (
   </svg>
 );
 
+const GlobeGraphic = () => (
+  <svg width="72" height="72" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <radialGradient id="appGlobeSphere" cx="38%" cy="32%" r="65%">
+        <stop offset="0%" stopColor="#bae6fd" />
+        <stop offset="35%" stopColor="#38bdf8" />
+        <stop offset="75%" stopColor="#0284c7" />
+        <stop offset="100%" stopColor="#0369a1" />
+      </radialGradient>
+      <radialGradient id="appGlobeGlow" cx="30%" cy="25%" r="50%">
+        <stop offset="0%" stopColor="#ffffff" stopOpacity="0.65" />
+        <stop offset="70%" stopColor="#ffffff" stopOpacity="0" />
+      </radialGradient>
+    </defs>
+    <circle cx="50" cy="50" r="44" fill="url(#appGlobeSphere)" />
+    <circle cx="50" cy="50" r="44" stroke="#e0f2fe" strokeWidth="2.2" strokeOpacity="0.8" />
+    <ellipse cx="50" cy="50" rx="44" ry="14" stroke="#e0f2fe" strokeWidth="2" strokeOpacity="0.75" />
+    <ellipse cx="50" cy="30" rx="38" ry="10" stroke="#e0f2fe" strokeWidth="1.8" strokeOpacity="0.6" />
+    <ellipse cx="50" cy="70" rx="38" ry="10" stroke="#e0f2fe" strokeWidth="1.8" strokeOpacity="0.6" />
+    <ellipse cx="50" cy="50" rx="20" ry="44" stroke="#e0f2fe" strokeWidth="2" strokeOpacity="0.75" />
+    <line x1="50" y1="6" x2="50" y2="94" stroke="#e0f2fe" strokeWidth="2" strokeOpacity="0.75" />
+    <ellipse cx="38" cy="28" rx="22" ry="14" fill="url(#appGlobeGlow)" transform="rotate(-20 38 28)" />
+    <g transform="translate(50, 68)">
+      <circle cx="0" cy="0" r="13" fill="#0f172a" stroke="#cbd5e1" strokeWidth="2" />
+      <circle cx="0" cy="0" r="8" fill="#1e293b" stroke="#64748b" strokeWidth="1.2" />
+      <circle cx="0" cy="0" r="3.5" fill="#38bdf8" />
+      <circle cx="-1.2" cy="-1.2" r="1.2" fill="#ffffff" />
+    </g>
+  </svg>
+);
+
+const SpeechBubbleGraphic = () => (
+  <svg width="84" height="84" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path
+      d="M50 16C30.5 16 15 31.2 15 50C15 57.2 17.3 64 21.2 69.5L17 84L32.2 79.8C37.5 82.5 43.5 84 50 84C69.5 84 85 68.8 85 50C85 31.2 69.5 16 50 16Z"
+      stroke="#bbf7d0"
+      strokeWidth="5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
+const PhoneHandsetGraphic = () => (
+  <svg width="72" height="72" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="appPhoneGradient" x1="80%" y1="10%" x2="20%" y2="90%">
+        <stop offset="0%" stopColor="#ff7597" />
+        <stop offset="45%" stopColor="#e11d48" />
+        <stop offset="85%" stopColor="#9f1239" />
+        <stop offset="100%" stopColor="#700926" />
+      </linearGradient>
+      <linearGradient id="appPhoneGloss" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#ffffff" stopOpacity="0.8" />
+        <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
+      </linearGradient>
+    </defs>
+    <path
+      d="M72.5 24.2C70.1 21.8 66.2 21.8 63.7 24.3L56.5 31.5C54.1 33.9 54.1 37.8 56.6 40.2L60.8 44.4C58.2 49.3 53.8 54.1 48.6 57.1L44.2 52.7C41.8 50.3 37.9 50.3 35.5 52.7L28.3 59.9C25.8 62.4 25.8 66.3 28.3 68.7L32.2 72.6C36.8 77.2 44.2 78.4 51.5 74.9C60.8 70.5 73.5 58.2 77.5 48.5C80.8 40.8 79.1 33.2 74.3 28.4L72.5 24.2Z"
+      fill="url(#appPhoneGradient)"
+    />
+    <path
+      d="M70 27L64 33C62.5 34.5 62.5 36.5 64 38L66.5 40.5C64 45.5 59.5 50.5 54 53.5L51.5 51C50 49.5 48 49.5 46.5 51L40.5 57"
+      stroke="url(#appPhoneGloss)"
+      strokeWidth="3"
+      strokeLinecap="round"
+    />
+  </svg>
+);
+
+const MagnifyingGlassGraphic = () => (
+  <svg width="72" height="72" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <radialGradient id="appGlassLens" cx="35%" cy="35%" r="65%">
+        <stop offset="0%" stopColor="#bae6fd" />
+        <stop offset="45%" stopColor="#38bdf8" />
+        <stop offset="90%" stopColor="#0284c7" />
+      </radialGradient>
+      <linearGradient id="appMetalRim" x1="20%" y1="20%" x2="80%" y2="80%">
+        <stop offset="0%" stopColor="#e0f2fe" />
+        <stop offset="50%" stopColor="#7dd3fc" />
+        <stop offset="100%" stopColor="#0369a1" />
+      </linearGradient>
+      <linearGradient id="appHandleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#a855f7" />
+        <stop offset="40%" stopColor="#6b21a8" />
+        <stop offset="100%" stopColor="#3b0764" />
+      </linearGradient>
+      <linearGradient id="appRingGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#f8fafc" />
+        <stop offset="100%" stopColor="#64748b" />
+      </linearGradient>
+    </defs>
+    <rect x="58" y="58" width="14" height="34" rx="7" transform="rotate(-45 58 58)" fill="url(#appHandleGrad)" />
+    <rect x="59.5" y="59.5" width="4" height="30" rx="2" transform="rotate(-45 58 58)" fill="#d8b4fe" opacity="0.6" />
+    <rect x="53" y="53" width="14" height="6" rx="3" transform="rotate(-45 53 53)" fill="url(#appRingGrad)" />
+    <circle cx="42" cy="42" r="28" stroke="url(#appMetalRim)" strokeWidth="5" />
+    <circle cx="42" cy="42" r="25.5" fill="url(#appGlassLens)" fillOpacity="0.9" />
+    <path
+      d="M23 40C23 29.5066 31.5066 21 42 21C44.5 21 46.8 21.5 49 22.4C44 23 35 27 30 33C25.5 38.5 24 45 24 48C23.3 45.5 23 42.8 23 40Z"
+      fill="#ffffff"
+      fillOpacity="0.85"
+    />
+    <circle cx="28" cy="28" r="2.5" fill="#ffffff" fillOpacity="0.9" />
+  </svg>
+);
+
+const VideoClapperGraphic = () => (
+  <svg width="72" height="72" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="18" y="38" width="64" height="46" rx="10" fill="#1e293b" />
+    <polygon points="45,50 45,72 63,61" fill="#ea580c" />
+    <path d="M18 48C18 42.4772 22.4772 38 28 38H72C77.5228 38 82 42.4772 82 48V56L18 64V48Z" fill="#ffffff" fillOpacity="0.15" />
+    <g transform="translate(18, 36) rotate(-14) translate(-18, -36)">
+      <rect x="18" y="24" width="64" height="13" rx="4" fill="#0f172a" />
+      <polygon points="26,24 33,24 28,37 21,37" fill="#ffffff" />
+      <polygon points="42,24 49,24 44,37 37,37" fill="#ffffff" />
+      <polygon points="58,24 65,24 60,37 53,37" fill="#ffffff" />
+      <polygon points="74,24 81,24 76,37 69,37" fill="#ffffff" />
+    </g>
+  </svg>
+);
+
+const SparklesGraphic = () => (
+  <svg width="72" height="72" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="appStarGold" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#fffbeb" />
+        <stop offset="35%" stopColor="#fef08a" />
+        <stop offset="70%" stopColor="#facc15" />
+        <stop offset="100%" stopColor="#eab308" />
+      </linearGradient>
+      <radialGradient id="appStarGlow" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stopColor="#ffffff" stopOpacity="0.9" />
+        <stop offset="50%" stopColor="#fde047" stopOpacity="0.4" />
+        <stop offset="100%" stopColor="#fde047" stopOpacity="0" />
+      </radialGradient>
+    </defs>
+    <circle cx="50" cy="50" r="30" fill="url(#appStarGlow)" />
+    <path
+      d="M50 15C50 34.33 34.33 50 15 50C34.33 50 50 65.67 50 85C50 65.67 65.67 50 85 50C65.67 50 50 34.33 50 15Z"
+      fill="url(#appStarGold)"
+    />
+    <path
+      d="M50 15C50 34.33 34.33 50 15 50C25 50 40 45 45 35C48 28 50 20 50 15Z"
+      fill="#ffffff"
+      fillOpacity="0.45"
+    />
+    <path
+      d="M26 18C26 23.5 20.5 28 15 28C20.5 28 26 32.5 26 38C26 32.5 31.5 28 37 28C31.5 28 26 23.5 26 18Z"
+      fill="url(#appStarGold)"
+    />
+    <path
+      d="M24 66C24 71 19 75 14 75C19 75 24 79 24 84C24 79 29 75 34 75C29 75 24 71 24 66Z"
+      fill="url(#appStarGold)"
+    />
+  </svg>
+);
+
 export default function App() {
   const { scrollYProgress } = useScroll();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeWorkCard, setActiveWorkCard] = useState<number | null>(null);
+
+  const workCardsData = [
+    {
+      id: "topgear",
+      name: "TOPGEAR HQ",
+      tag: "AUTOMOTIVE & E-COMMERCE",
+      cardClass: "work-card-topgear border-purple-500/30",
+      logo: workTopgearImg,
+      logoClass: "max-h-24 sm:max-h-28 w-auto object-contain drop-shadow-xl select-none",
+      bgDefault: "bg-gradient-to-b from-[#170C2C] via-[#381559] to-[#681A9E]",
+      sparkleColor: "text-purple-200",
+      tagColor: "text-purple-200",
+      subtextColor: "text-purple-200/80",
+      iconBoxClass: "bg-purple-600/35 border-purple-400/30 text-white",
+      buttonClass: "bg-gradient-to-r from-[#9810FA] to-[#E60076] hover:brightness-110 shadow-purple-900/50",
+      inquireLink: "https://wa.me/918792359555?text=Hi,%20I%20am%20interested%20in%20solutions%20like%20Topgear%20HQ",
+      solutions: [
+        { icon: Globe, text: "Website design and development" },
+        { icon: ShoppingCart, text: "Cart management" },
+        { icon: MessageCircle, text: "WhatsApp inquiry" },
+      ],
+    },
+    {
+      id: "d24",
+      name: "D24 STUDIO",
+      tag: "CREATIVE & 3D MEDIA",
+      cardClass: "work-card-d24 border-orange-500/30",
+      logo: workD24Img,
+      logoClass: "max-h-24 sm:max-h-28 w-auto object-contain drop-shadow-[0_0_25px_rgba(255,100,50,0.5)] select-none",
+      bgDefault: "bg-gradient-to-b from-[#22130E] via-[#57291A] to-[#9E3D18]",
+      sparkleColor: "text-orange-300",
+      tagColor: "text-orange-200",
+      subtextColor: "text-orange-200/80",
+      iconBoxClass: "bg-orange-600/35 border-orange-400/30 text-orange-200",
+      buttonClass: "bg-gradient-to-r from-[#EA580C] to-[#E60076] hover:brightness-110 shadow-orange-950/50",
+      inquireLink: "https://wa.me/918792359555?text=Hi,%20I%20am%20interested%20in%20solutions%20like%20D24%20Studio",
+      solutions: [
+        { icon: Film, text: "3D Anamorphic videos" },
+        { icon: Palette, text: "Brand identity & visual motion" },
+        { icon: Sparkles, text: "Marketing video production" },
+      ],
+    },
+    {
+      id: "srgroup",
+      name: "SR GROUP",
+      tag: "CORPORATE & ENTERPRISE",
+      cardClass: "work-card-srgroup border-blue-500/30",
+      logo: workSrgroupImg,
+      logoClass: "max-h-20 sm:max-h-24 w-auto object-contain drop-shadow-[0_0_20px_rgba(56,189,248,0.4)] select-none",
+      bgDefault: "bg-gradient-to-b from-[#07172E] via-[#0B2B5A] to-[#0E489E]",
+      sparkleColor: "text-blue-300",
+      tagColor: "text-blue-200",
+      subtextColor: "text-blue-200/80",
+      iconBoxClass: "bg-blue-600/35 border-blue-400/30 text-blue-200",
+      buttonClass: "bg-gradient-to-r from-[#1673ff] to-[#06B6D4] hover:brightness-110 shadow-blue-950/50",
+      inquireLink: "https://wa.me/918792359555?text=Hi,%20I%20am%20interested%20in%20solutions%20like%20SR%20Group",
+      solutions: [
+        { icon: Monitor, text: "High-converting corporate website" },
+        { icon: Search, text: "Google Business optimization" },
+        { icon: PhoneCall, text: "Direct WhatsApp & call routing" },
+      ],
+    },
+  ];
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -312,7 +547,7 @@ export default function App() {
       </section>
 
       {/* Enhanced Services Section - Slush Style */}
-      <section id="services" className="relative py-12 sm:py-16 md:py-24 px-4 sm:px-6 md:px-8 bg-gradient-to-b from-white to-[#F5F3FF] overflow-hidden">
+      <section id="services" className="relative py-14 sm:py-20 md:py-28 px-4 sm:px-6 md:px-8 bg-white overflow-hidden scroll-mt-20">
         <div className="max-w-7xl mx-auto">
           {/* Section Header */}
           <motion.div
@@ -332,154 +567,201 @@ export default function App() {
             </p>
           </motion.div>
 
-          {/* Services Grid - Slush Style Cards */}
+          {/* Services Grid - Bento Style Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto">
-            {/* First Row - 3 cards forming inverted V */}
+            {/* Card 1: Fast Websites (Blue) */}
             <motion.div
-              className="bg-[#5BA3FF] rounded-3xl sm:rounded-[32px] p-6 sm:p-8 md:p-10 min-h-[280px] sm:min-h-[320px] md:min-h-[350px] flex flex-col justify-between shadow-xl cursor-pointer sm:translate-y-0"
-              initial={{ opacity: 0, y: 50 }}
+              className="service-card bg-[#5BA3FF] rounded-[32px] sm:rounded-[36px] p-7 sm:p-9 md:p-10 min-h-[320px] sm:min-h-[350px] md:min-h-[370px] flex flex-col justify-between shadow-xl cursor-pointer"
+              initial="initial"
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0 }}
               viewport={{ once: true, amount: 0.1 }}
-              whileHover={{ scale: 1.05, rotate: 2 }}
-              whileTap={{ scale: 0.95 }}
+              whileHover="hover"
+              transition={{ duration: 0.3 }}
             >
               <div>
-                <h3 className="text-2xl sm:text-3xl md:text-4xl font-black italic text-white leading-tight">
+                <h3 className="text-3xl sm:text-4xl md:text-[42px] font-black italic text-white tracking-tight leading-tight">
                   FAST<br />WEBSITES
                 </h3>
               </div>
-              <div className="flex justify-center">
+              <div className="flex justify-center pb-2">
                 <motion.div
-                  className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 bg-white/30 rounded-2xl sm:rounded-3xl flex items-center justify-center"
-                  whileHover={{ scale: 1.2, rotate: 360 }}
-                  transition={{ duration: 0.6 }}
+                  className="service-icon-wrapper"
+                  variants={{
+                    initial: { rotate: 0, scale: 1 },
+                    hover: { rotate: 360, scale: 1.12 }
+                  }}
+                  transition={{ type: "spring", stiffness: 220, damping: 15 }}
                 >
-                  <div className="text-4xl sm:text-5xl md:text-6xl">🌐</div>
+                  <img
+                    src={globeIconImg}
+                    alt="Fast Websites"
+                    className="w-28 h-28 sm:w-32 sm:h-32 object-contain drop-shadow-md select-none pointer-events-none"
+                    draggable="false"
+                  />
                 </motion.div>
               </div>
             </motion.div>
 
+            {/* Card 2: WhatsApp Integration (Green) */}
             <motion.div
-              className="bg-[#25D366] rounded-3xl sm:rounded-[32px] p-6 sm:p-8 md:p-10 min-h-[280px] sm:min-h-[320px] md:min-h-[350px] flex flex-col justify-between shadow-xl cursor-pointer sm:-translate-y-8"
-              initial={{ opacity: 0, y: 50 }}
+              className="service-card bg-[#25D366] rounded-[32px] sm:rounded-[36px] p-7 sm:p-9 md:p-10 min-h-[320px] sm:min-h-[350px] md:min-h-[370px] flex flex-col justify-between shadow-xl cursor-pointer"
+              initial="initial"
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
               viewport={{ once: true, amount: 0.1 }}
-              whileHover={{ scale: 1.05, rotate: -2 }}
-              whileTap={{ scale: 0.95 }}
+              whileHover="hover"
+              transition={{ duration: 0.3 }}
             >
-              <div className="flex justify-center mb-4">
+              <div className="flex justify-center pt-2">
                 <motion.div
-                  whileHover={{ rotate: 360 }}
-                  transition={{ duration: 0.6 }}
+                  className="service-icon-wrapper"
+                  variants={{
+                    initial: { rotate: 0, scale: 1 },
+                    hover: { rotate: 360, scale: 1.12 }
+                  }}
+                  transition={{ type: "spring", stiffness: 220, damping: 15 }}
                 >
-                  <MessageCircle className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 text-white/40" strokeWidth={1.5} />
+                  <img
+                    src={whatsappIconImg}
+                    alt="WhatsApp Integration"
+                    className="w-24 h-24 sm:w-28 sm:h-28 object-contain select-none pointer-events-none"
+                    draggable="false"
+                  />
                 </motion.div>
               </div>
               <div>
-                <h3 className="text-2xl sm:text-3xl md:text-4xl font-black italic text-gray-900 leading-tight">
+                <h3 className="text-3xl sm:text-4xl md:text-[42px] font-black italic text-gray-950 tracking-tight leading-tight">
                   WHATSAPP<br />INTEGRATION
                 </h3>
               </div>
             </motion.div>
 
+            {/* Card 3: Call Buttons (Hot Magenta/Pink) */}
             <motion.div
-              className="bg-[#E60076] rounded-3xl sm:rounded-[32px] p-6 sm:p-8 md:p-10 min-h-[280px] sm:min-h-[320px] md:min-h-[350px] flex flex-col justify-between shadow-xl cursor-pointer sm:translate-y-0"
-              initial={{ opacity: 0, y: 50 }}
+              className="service-card bg-[#E60076] rounded-[32px] sm:rounded-[36px] p-7 sm:p-9 md:p-10 min-h-[320px] sm:min-h-[350px] md:min-h-[370px] flex flex-col justify-between shadow-xl cursor-pointer"
+              initial="initial"
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
               viewport={{ once: true, amount: 0.1 }}
-              whileHover={{ scale: 1.05, rotate: 2 }}
-              whileTap={{ scale: 0.95 }}
+              whileHover="hover"
+              transition={{ duration: 0.3 }}
             >
               <div>
-                <h3 className="text-2xl sm:text-3xl md:text-4xl font-black italic text-white leading-tight">
+                <h3 className="text-3xl sm:text-4xl md:text-[42px] font-black italic text-white tracking-tight leading-tight">
                   CALL<br />BUTTONS
                 </h3>
               </div>
-              <div className="flex justify-center">
+              <div className="flex justify-center pb-2">
                 <motion.div
-                  className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 bg-white/30 rounded-2xl sm:rounded-3xl flex items-center justify-center"
-                  whileHover={{ scale: 1.2, rotate: 360 }}
-                  transition={{ duration: 0.6 }}
+                  className="service-icon-wrapper"
+                  variants={{
+                    initial: { rotate: 0, scale: 1 },
+                    hover: { rotate: 360, scale: 1.12 }
+                  }}
+                  transition={{ type: "spring", stiffness: 220, damping: 15 }}
                 >
-                  <div className="text-4xl sm:text-5xl md:text-6xl">📞</div>
+                  <img
+                    src={phoneIconImg}
+                    alt="Call Buttons"
+                    className="w-24 h-24 sm:w-28 sm:h-28 object-contain drop-shadow-md select-none pointer-events-none"
+                    draggable="false"
+                  />
                 </motion.div>
               </div>
             </motion.div>
 
-            {/* Second Row - 3 cards forming V */}
+            {/* Card 4: Google Business (Yellow) */}
             <motion.div
-              className="bg-[#FFD520] rounded-3xl sm:rounded-[32px] p-6 sm:p-8 md:p-10 min-h-[280px] sm:min-h-[320px] md:min-h-[350px] flex flex-col justify-between shadow-xl cursor-pointer sm:-translate-y-8"
-              initial={{ opacity: 0, y: 50 }}
+              className="service-card bg-[#FFD520] rounded-[32px] sm:rounded-[36px] p-7 sm:p-9 md:p-10 min-h-[320px] sm:min-h-[350px] md:min-h-[370px] flex flex-col justify-between shadow-xl cursor-pointer"
+              initial="initial"
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
               viewport={{ once: true, amount: 0.1 }}
-              whileHover={{ scale: 1.05, rotate: -2 }}
-              whileTap={{ scale: 0.95 }}
+              whileHover="hover"
+              transition={{ duration: 0.3 }}
             >
-              <div className="flex justify-center mb-4">
+              <div className="flex justify-center pt-2">
                 <motion.div
-                  className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 bg-white/30 rounded-2xl sm:rounded-3xl flex items-center justify-center"
-                  whileHover={{ scale: 1.2, rotate: 360 }}
-                  transition={{ duration: 0.6 }}
+                  className="service-icon-wrapper"
+                  variants={{
+                    initial: { rotate: 0, scale: 1 },
+                    hover: { rotate: 360, scale: 1.12 }
+                  }}
+                  transition={{ type: "spring", stiffness: 220, damping: 15 }}
                 >
-                  <div className="text-4xl sm:text-5xl md:text-6xl">🔍</div>
+                  <img
+                    src={searchIconImg}
+                    alt="Google Business"
+                    className="w-24 h-24 sm:w-28 sm:h-28 object-contain drop-shadow-md select-none pointer-events-none"
+                    draggable="false"
+                  />
                 </motion.div>
               </div>
               <div>
-                <h3 className="text-2xl sm:text-3xl md:text-4xl font-black italic text-gray-900 leading-tight">
+                <h3 className="text-3xl sm:text-4xl md:text-[42px] font-black italic text-gray-950 tracking-tight leading-tight">
                   GOOGLE<br />BUSINESS
                 </h3>
               </div>
             </motion.div>
 
+            {/* Card 5: Marketing Videos (Orange) */}
             <motion.div
-              className="bg-[#FF6B35] rounded-3xl sm:rounded-[32px] p-6 sm:p-8 md:p-10 min-h-[280px] sm:min-h-[320px] md:min-h-[350px] flex flex-col justify-between shadow-xl cursor-pointer sm:translate-y-0"
-              initial={{ opacity: 0, y: 50 }}
+              className="service-card bg-[#FF6B35] rounded-[32px] sm:rounded-[36px] p-7 sm:p-9 md:p-10 min-h-[320px] sm:min-h-[350px] md:min-h-[370px] flex flex-col justify-between shadow-xl cursor-pointer"
+              initial="initial"
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
               viewport={{ once: true, amount: 0.1 }}
-              whileHover={{ scale: 1.05, rotate: 2 }}
-              whileTap={{ scale: 0.95 }}
+              whileHover="hover"
+              transition={{ duration: 0.3 }}
             >
               <div>
-                <h3 className="text-2xl sm:text-3xl md:text-4xl font-black italic text-white leading-tight">
+                <h3 className="text-3xl sm:text-4xl md:text-[42px] font-black italic text-white tracking-tight leading-tight">
                   MARKETING<br />VIDEOS
                 </h3>
               </div>
-              <div className="flex justify-center">
+              <div className="flex justify-center pb-2">
                 <motion.div
-                  className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 bg-white/30 rounded-2xl sm:rounded-3xl flex items-center justify-center"
-                  whileHover={{ scale: 1.2, rotate: 360 }}
-                  transition={{ duration: 0.6 }}
+                  className="service-icon-wrapper"
+                  variants={{
+                    initial: { rotate: 0, scale: 1 },
+                    hover: { rotate: 360, scale: 1.12 }
+                  }}
+                  transition={{ type: "spring", stiffness: 220, damping: 15 }}
                 >
-                  <div className="text-4xl sm:text-5xl md:text-6xl">🎬</div>
+                  <img
+                    src={videoIconImg}
+                    alt="Marketing Videos"
+                    className="w-24 h-24 sm:w-28 sm:h-28 object-contain drop-shadow-md select-none pointer-events-none"
+                    draggable="false"
+                  />
                 </motion.div>
               </div>
             </motion.div>
 
+            {/* Card 6: 3D Videos (Lavender) */}
             <motion.div
-              className="bg-[#E4B3FF] rounded-3xl sm:rounded-[32px] p-6 sm:p-8 md:p-10 min-h-[280px] sm:min-h-[320px] md:min-h-[350px] flex flex-col justify-between shadow-xl cursor-pointer sm:-translate-y-8"
-              initial={{ opacity: 0, y: 50 }}
+              className="service-card bg-[#E4B3FF] rounded-[32px] sm:rounded-[36px] p-7 sm:p-9 md:p-10 min-h-[320px] sm:min-h-[350px] md:min-h-[370px] flex flex-col justify-between shadow-xl cursor-pointer"
+              initial="initial"
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.5 }}
               viewport={{ once: true, amount: 0.1 }}
-              whileHover={{ scale: 1.05, rotate: -2 }}
-              whileTap={{ scale: 0.95 }}
+              whileHover="hover"
+              transition={{ duration: 0.3 }}
             >
-              <div className="flex justify-center mb-4">
+              <div className="flex justify-center pt-2">
                 <motion.div
-                  className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 bg-gradient-to-br from-[#FF6B35] to-[#E60076] rounded-2xl sm:rounded-3xl flex items-center justify-center shadow-xl"
-                  whileHover={{ rotate: 360, scale: 1.1 }}
-                  transition={{ duration: 0.8 }}
+                  className="service-icon-wrapper"
+                  variants={{
+                    initial: { rotate: 0, scale: 1 },
+                    hover: { rotate: 360, scale: 1.12 }
+                  }}
+                  transition={{ type: "spring", stiffness: 220, damping: 15 }}
                 >
-                  <div className="text-4xl sm:text-5xl md:text-6xl">✨</div>
+                  <img
+                    src={starsIconImg}
+                    alt="3D Videos"
+                    className="w-24 h-24 sm:w-28 sm:h-28 object-contain drop-shadow-md select-none pointer-events-none"
+                    draggable="false"
+                  />
                 </motion.div>
               </div>
               <div>
-                <h3 className="text-2xl sm:text-3xl md:text-4xl font-black italic text-gray-900 leading-tight">
+                <h3 className="text-3xl sm:text-4xl md:text-[42px] font-black italic text-gray-950 tracking-tight leading-tight">
                   3D<br />VIDEOS
                 </h3>
               </div>
@@ -509,77 +791,110 @@ export default function App() {
             </p>
           </motion.div>
 
-          {/* Creative Image Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-12 sm:mb-16 md:mb-20">
-            {/* Image 1 */}
-            <motion.div
-              className="relative h-[300px] sm:h-[400px] md:h-[500px] rounded-3xl sm:rounded-[32px] overflow-hidden shadow-2xl"
-              initial={{ opacity: 0, y: 50, rotate: -5 }}
-              whileInView={{ opacity: 1, y: 0, rotate: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              viewport={{ once: true, amount: 0.1 }}
-              whileHover={{ scale: 1.05, rotate: 2, zIndex: 10 }}
-            >
-              <img
-                src="https://images.unsplash.com/photo-1632937145991-91620be68319?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjcmVhdGl2ZSUyMGRlc2lnbiUyMHdvcmtzcGFjZXxlbnwxfHx8fDE3Njg0ODU3Mzl8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-                alt="Creative workspace"
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#FF6B35]/80 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-6 sm:p-8">
-                <p className="text-white text-xl sm:text-2xl md:text-3xl font-black">CREATIVE DESIGNS</p>
-              </div>
-            </motion.div>
+          {/* Work Cards Grid with Interactive Solutions on Hover */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-12 sm:mb-16 md:mb-20 max-w-6xl mx-auto">
+            {workCardsData.map((card, index) => {
+              const isActive = activeWorkCard === index;
+              return (
+                <motion.div
+                  key={card.id}
+                  className={`work-card ${card.cardClass} ${isActive ? 'is-active' : ''}`}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.1 }}
+                  transition={{ duration: 0.5, delay: index * 0.15 }}
+                  onClick={() => setActiveWorkCard(isActive ? null : index)}
+                >
+                  {/* Default State */}
+                  <div className={`work-card-default ${card.bgDefault}`}>
+                    <div />
+                    <div className="flex items-center justify-center py-12 px-6">
+                      <img
+                        src={card.logo}
+                        alt={card.name}
+                        className={card.logoClass}
+                        draggable="false"
+                      />
+                    </div>
+                    <div className="flex items-center justify-between pt-4 border-t border-white/10">
+                      <div>
+                        <h3 className="text-xl sm:text-2xl font-black text-white tracking-wide">
+                          {card.name}
+                        </h3>
+                        <p className={`text-[11px] font-semibold ${card.subtextColor} tracking-widest uppercase mt-0.5`}>
+                          HOVER TO VIEW SOLUTIONS
+                        </p>
+                      </div>
+                      <div className={`w-8 h-8 rounded-full bg-white/10 border border-white/15 flex items-center justify-center ${card.sparkleColor} shadow-inner`}>
+                        <Sparkles className="w-4 h-4" />
+                      </div>
+                    </div>
+                  </div>
 
-            {/* Image 2 - Video Placeholder */}
-            <motion.div
-              className="relative h-[300px] sm:h-[400px] md:h-[500px] rounded-3xl sm:rounded-[32px] overflow-hidden shadow-2xl bg-[#1673ff]"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              viewport={{ once: true, amount: 0.1 }}
-              whileHover={{ scale: 1.05, zIndex: 10 }}
-            >
-              <img
-                src="https://images.unsplash.com/photo-1673767297196-ce9739933932?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx2aWRlbyUyMHByb2R1Y3Rpb24lMjBzdHVkaW98ZW58MXx8fHwxNzY4NDU5MDgyfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-                alt="Video content"
-                className="w-full h-full object-cover"
-              />
-              <motion.div
-                className="absolute inset-0 flex items-center justify-center"
-                whileHover={{ scale: 1.1 }}
-              >
-                <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 bg-white/90 rounded-full flex items-center justify-center shadow-2xl cursor-pointer">
-                  <div className="w-0 h-0 border-t-[12px] sm:border-t-[16px] border-t-transparent border-l-[20px] sm:border-l-[24px] border-l-[#1673ff] border-b-[12px] sm:border-b-[16px] border-b-transparent ml-1"></div>
-                </div>
-              </motion.div>
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 sm:p-8">
-                <p className="text-white text-xl sm:text-2xl md:text-3xl font-black">3D VIDEOS</p>
-              </div>
-            </motion.div>
+                  {/* Hover State (Delivered Solutions) */}
+                  <div className="work-card-hover">
+                    {/* Top Header Row */}
+                    <div className="flex items-center justify-between gap-2 pb-2">
+                      <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-white/20 shadow-inner">
+                        <span className="w-2 h-2 rounded-full bg-white/90" />
+                        <span className="text-[11px] font-black tracking-wider text-white uppercase">
+                          DELIVERED SOLUTIONS
+                        </span>
+                      </div>
+                      <span className={`text-[10px] sm:text-[11px] font-bold tracking-wider ${card.tagColor} uppercase truncate`}>
+                        {card.tag}
+                      </span>
+                    </div>
 
-            {/* Image 3 */}
-            <motion.div
-              className="relative h-[300px] sm:h-[400px] md:h-[500px] rounded-3xl sm:rounded-[32px] overflow-hidden shadow-2xl md:col-span-1 lg:col-span-1"
-              initial={{ opacity: 0, y: 50, rotate: 5 }}
-              whileInView={{ opacity: 1, y: 0, rotate: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              viewport={{ once: true, amount: 0.1 }}
-              whileHover={{ scale: 1.05, rotate: -2, zIndex: 10 }}
-            >
-              <img
-                src="https://images.unsplash.com/photo-1709715357520-5e1047a2b691?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxidXNpbmVzcyUyMG1lZXRpbmclMjB0ZWFtfGVufDF8fHx8MTc2ODQzMzc5OHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-                alt="Happy clients"
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#E60076]/80 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-6 sm:p-8">
-                <p className="text-white text-xl sm:text-2xl md:text-3xl font-black">HAPPY CLIENTS</p>
-              </div>
-            </motion.div>
+                    {/* Solutions Capsules Stack */}
+                    <div className="space-y-3 my-auto py-2">
+                      {card.solutions.map((sol, sIdx) => {
+                        const SolIcon = sol.icon;
+                        return (
+                          <div
+                            key={sIdx}
+                            className="bg-black/35 backdrop-blur-md border border-white/15 rounded-2xl p-3.5 flex items-center justify-between shadow-lg"
+                          >
+                            <div className="flex items-center gap-3 min-w-0">
+                              <div className={`w-10 h-10 rounded-xl ${card.iconBoxClass} flex items-center justify-center flex-shrink-0 shadow-inner`}>
+                                <SolIcon className="w-5 h-5" />
+                              </div>
+                              <span className="text-sm sm:text-base font-bold text-white tracking-wide truncate">
+                                {sol.text}
+                              </span>
+                            </div>
+                            <div className="w-5 h-5 rounded-full border border-teal-400/90 bg-teal-400/10 flex items-center justify-center text-teal-300 flex-shrink-0 ml-2">
+                              <Check className="w-3 h-3 stroke-[3]" />
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+
+                    {/* Bottom Row */}
+                    <div className="flex items-center justify-between pt-2 border-t border-white/10">
+                      <h3 className="text-xl sm:text-2xl font-black text-white tracking-tight">
+                        {card.name}
+                      </h3>
+                      <a
+                        href={card.inquireLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`${card.buttonClass} text-white px-5 py-2.5 rounded-full text-xs sm:text-sm font-black flex items-center gap-1.5 shadow-lg transform hover:scale-105 transition-all`}
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        Inquire <span className="text-sm font-bold">↗</span>
+                      </a>
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
 
-          {/* Decorative S Container */}
+          {/* Decorative S Container / TTTT Interactive */}
           <motion.div
-            className="relative h-[600px] sm:h-[500px] md:h-[600px] lg:h-[400px] xl:h-[500px] mb-12 sm:mb-16 md:mb-20 overflow-hidden rounded-3xl sm:rounded-[48px]"
+            className="relative h-[520px] sm:h-[580px] md:h-[520px] lg:h-[620px] mb-12 sm:mb-16 md:mb-20 overflow-hidden rounded-[32px] sm:rounded-[38px] md:rounded-[48px]"
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8 }}

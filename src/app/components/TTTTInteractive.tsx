@@ -3,39 +3,28 @@ import { useState } from 'react';
 
 const sections = [
   {
-    letter: 'T',
-    title: 'TECH',
-    description: 'Modern technology solutions that power your business forward',
-    color: 'from-[#FF6B35] to-[#E60076]',
-    textColor: 'text-[#FF6B35]',
+    letter: 'E',
+    badge: 'Exceptional',
+    bgColor: '#f58a27',
+    textColor: '#000000',
   },
   {
     letter: 'R',
-    title: 'RESULTS',
-    description: 'Proven strategies that deliver measurable business outcomes',
-    color: 'from-[#5BA3FF] to-[#9810FA]',
-    textColor: 'text-[#5BA3FF]',
+    badge: 'Reliable',
+    bgColor: '#1673ff',
+    textColor: '#000000',
   },
   {
-    letter: 'U',
-    title: 'UNIQUE',
-    description: 'Stand out from competitors with custom-tailored solutions',
-    color: 'from-[#25D366] to-[#009343]',
-    textColor: 'text-[#25D366]',
+    letter: 'I',
+    badge: 'Innovative',
+    bgColor: '#c4c4c4',
+    textColor: '#000000',
   },
   {
-    letter: 'S',
-    title: 'SUCCESS',
-    description: 'Your growth is our mission - we succeed when you do',
-    color: 'from-[#FFD520] to-[#FF6B35]',
-    textColor: 'text-[#FFD520]',
-  },
-  {
-    letter: 'T',
-    title: 'TRANSFORM',
-    description: 'Complete digital transformation from website to customer',
-    color: 'from-[#E60076] to-[#9810FA]',
-    textColor: 'text-[#E60076]',
+    letter: 'P',
+    badge: 'Professional',
+    bgColor: '#f5e6d3',
+    textColor: '#30220a',
   },
 ];
 
@@ -43,71 +32,50 @@ export function TTTTInteractive() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
-    <div className="flex w-full h-[400px] sm:h-[500px] md:h-[600px] lg:h-[700px] gap-2">
+    <div className="flex flex-col md:flex-row w-full h-full rounded-[32px] sm:rounded-[38px] md:rounded-[48px] overflow-hidden shadow-2xl">
       {sections.map((section, index) => {
         const isHovered = hoveredIndex === index;
         const isAnyHovered = hoveredIndex !== null;
-        
+
         let flexValue = 1;
         if (isAnyHovered) {
-          flexValue = isHovered ? 2 : 0.5;
+          flexValue = isHovered ? 2.2 : 0.6;
         }
 
         return (
           <motion.div
             key={index}
-            className={`relative overflow-hidden cursor-pointer rounded-2xl bg-gradient-to-br ${section.color}`}
-            initial={{ flex: 1 }}
+            className="relative overflow-hidden cursor-pointer flex-1"
+            style={{ backgroundColor: section.bgColor }}
             animate={{ flex: flexValue }}
-            transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
             onMouseEnter={() => setHoveredIndex(index)}
             onMouseLeave={() => setHoveredIndex(null)}
           >
             {/* Letter */}
             <motion.div
-              className="absolute inset-0 flex items-center justify-center"
+              className="absolute inset-0 flex items-center justify-center pointer-events-none"
               animate={{
-                scale: isHovered ? 1.1 : 1,
+                scale: isHovered ? 1.08 : 1,
               }}
-              transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
             >
-              <h2
-                className="font-black text-white/20 select-none"
-                style={{
-                  fontSize: 'clamp(8rem, 20vw, 18rem)',
-                  lineHeight: 1,
-                }}
+              <span
+                className="tttt-letter font-black select-none"
+                style={{ color: section.textColor }}
               >
                 {section.letter}
-              </h2>
+              </span>
             </motion.div>
 
-            {/* Content */}
-            <motion.div
-              className="absolute inset-0 flex flex-col justify-end p-6 sm:p-8 md:p-10 lg:p-12"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: isHovered ? 1 : 0 }}
-              transition={{ duration: 0.3 }}
-            >
-              <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white mb-3 sm:mb-4">
-                {section.title}
-              </h3>
-              <p className="text-base sm:text-lg md:text-xl text-white/90 font-bold max-w-md">
-                {section.description}
-              </p>
-            </motion.div>
-
-            {/* Minimal label when not hovered */}
-            <motion.div
-              className="absolute bottom-6 left-1/2 -translate-x-1/2"
-              initial={{ opacity: 1 }}
-              animate={{ opacity: isHovered ? 0 : 1 }}
-              transition={{ duration: 0.3 }}
-            >
-              <p className="text-white font-black text-sm sm:text-base md:text-lg transform -rotate-90 whitespace-nowrap origin-center">
-                {section.title}
-              </p>
-            </motion.div>
+            {/* Badge: Centered on the left on Mobile, Bottom-Left on Desktop */}
+            <div className="absolute left-4 sm:left-6 top-1/2 -translate-y-1/2 md:top-auto md:translate-y-0 md:bottom-6 md:left-6 lg:bottom-8 lg:left-8 z-10 pointer-events-none">
+              <div className="bg-white rounded-2xl px-3.5 py-1.5 sm:px-4 sm:py-2 md:px-4 md:py-2 lg:px-5 lg:py-2.5 shadow-md md:shadow-lg flex items-center justify-center select-none">
+                <span className="text-xs sm:text-sm md:text-base lg:text-lg font-black text-gray-950 tracking-wide whitespace-nowrap">
+                  {section.badge}
+                </span>
+              </div>
+            </div>
           </motion.div>
         );
       })}

@@ -238,47 +238,67 @@
         }
 
         /* TTTT Interactive Sections */
+        .tttt-container {
+            display: flex;
+            transition: all 0.5s ease;
+        }
+
         .tttt-section {
             flex: 1;
-            transition: flex 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
             cursor: pointer;
-        }
-
-        .tttt-section:hover {
-            flex: 2;
-        }
-
-        .tttt-section:not(:hover) {
-            flex: 0.5;
-        }
-
-        .tttt-container:not(:hover) .tttt-section {
-            flex: 1;
+            transition: flex 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s ease;
+            will-change: flex;
         }
 
         .tttt-letter {
-            font-size: 18rem;
             font-weight: 900;
             line-height: 1;
             user-select: none;
-            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .tttt-section:hover .tttt-letter {
-            transform: scale(1.1);
-        }
+        /* Desktop & Tablet (md and above): Horizontal Accordion with hover expansion */
+        @media (min-width: 768px) {
+            .tttt-container:hover .tttt-section:not(:hover) {
+                flex: 0.6;
+            }
 
-        @media (max-width: 1024px) {
-            .tttt-letter {
-                font-size: 10rem;
+            .tttt-section:hover {
+                flex: 2.2 !important;
+            }
+
+            .tttt-section:hover .tttt-letter {
+                transform: scale(1.1);
             }
         }
 
-        @media (max-width: 640px) {
+        /* Mobile letter sizing (< 768px): Centered stacked bands */
+        @media (max-width: 767px) {
             .tttt-letter {
-                font-size: 8rem;
+                font-size: clamp(4.5rem, 16vw, 6.5rem);
+            }
+
+            .tttt-section:hover .tttt-letter {
+                transform: scale(1.05);
+            }
+        }
+
+        /* Tablet letter sizing (768px - 1024px) */
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .tttt-letter {
+                font-size: clamp(7rem, 12vw, 11rem);
+            }
+        }
+
+        /* Desktop letter sizing (> 1024px) */
+        @media (min-width: 1025px) {
+            .tttt-letter {
+                font-size: clamp(10rem, 15vw, 17rem);
             }
         }
 
@@ -297,43 +317,116 @@
 
         /* Service Cards */
         .service-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 36px;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+            will-change: transform;
         }
 
         .service-card:hover {
-            transform: scale(1.05) rotate(2deg);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            transform: translateY(-8px);
+            box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.2);
         }
 
-        .service-card:nth-child(even):hover {
-            transform: scale(1.05) rotate(-2deg);
+        .service-icon-wrapper {
+            transition: transform 0.85s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transform-origin: center center;
+            will-change: transform;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .service-icon {
-            transition: transform 0.6s ease;
+        /* Hover on card triggers icon rotation */
+        .service-card:hover .service-icon-wrapper {
+            transform: rotate(360deg) scale(1.12);
         }
 
-        .service-card:hover .service-icon {
-            transform: scale(1.2) rotate(360deg);
+        /* Direct hover on icon gives extra bounce */
+        .service-icon-wrapper:hover {
+            transform: rotate(360deg) scale(1.18) !important;
         }
 
-        /* Work Gallery */
-        .work-item {
-            transition: transform 0.3s ease, z-index 0.3s ease;
+        /* Work Cards & Interactive Solutions Hover with Distinct Brand Gradients */
+        .work-card {
+            position: relative;
+            border-radius: 36px;
+            overflow: hidden;
+            cursor: pointer;
+            min-height: 480px;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.35);
         }
 
-        .work-item:hover {
-            transform: scale(1.05);
-            z-index: 10;
+        .work-card:hover,
+        .work-card.is-active {
+            transform: translateY(-8px);
         }
 
-        .work-overlay {
+        .work-card-topgear:hover,
+        .work-card-topgear.is-active {
+            box-shadow: 0 25px 50px -10px rgba(126, 11, 199, 0.5);
+        }
+
+        .work-card-d24:hover,
+        .work-card-d24.is-active {
+            box-shadow: 0 25px 50px -10px rgba(217, 70, 14, 0.5);
+        }
+
+        .work-card-srgroup:hover,
+        .work-card-srgroup.is-active {
+            box-shadow: 0 25px 50px -10px rgba(16, 75, 181, 0.5);
+        }
+
+        .work-card-default {
+            position: absolute;
+            inset: 0;
+            padding: 2.25rem 1.75rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 1;
+        }
+
+        .work-card-hover {
+            position: absolute;
+            inset: 0;
+            padding: 1.75rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
             opacity: 0;
-            transition: opacity 0.3s ease;
+            pointer-events: none;
+            transform: translateY(12px) scale(0.97);
+            transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1), transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 2;
         }
 
-        .work-item:hover .work-overlay {
+        /* Distinct Hover Background Gradients per Brand */
+        .work-card-topgear .work-card-hover {
+            background: linear-gradient(180deg, #170C2C 0%, #381559 45%, #7e0bc7 100%);
+        }
+
+        .work-card-d24 .work-card-hover {
+            background: linear-gradient(180deg, #22130E 0%, #57291A 45%, #b43c0c 100%);
+        }
+
+        .work-card-srgroup .work-card-hover {
+            background: linear-gradient(180deg, #07172E 0%, #0B2B5A 45%, #0e4db8 100%);
+        }
+
+        .work-card:hover .work-card-default,
+        .work-card.is-active .work-card-default {
+            opacity: 0;
+            pointer-events: none;
+            transform: scale(0.94);
+        }
+
+        .work-card:hover .work-card-hover,
+        .work-card.is-active .work-card-hover {
             opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0) scale(1);
         }
 
         /* Smooth Scroll */
@@ -579,7 +672,7 @@
 
     <!-- Services Section -->
     <section id="services"
-        class="relative py-12 sm:py-16 md:py-24 px-4 sm:px-6 md:px-8 bg-gradient-to-b from-white to-[#F5F3FF] overflow-hidden">
+        class="relative py-14 sm:py-20 md:py-28 px-4 sm:px-6 md:px-8 bg-white overflow-hidden scroll-mt-20">
         <div class="max-w-7xl mx-auto">
             <!-- Section Header -->
             <div class="text-center mb-12 sm:mb-16 md:mb-20 reveal">
@@ -594,93 +687,86 @@
 
             <!-- Services Grid -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto">
-                <!-- Fast Websites -->
+                <!-- 1. Fast Websites (Blue) -->
                 <div
-                    class="service-card bg-[#5BA3FF] rounded-3xl sm:rounded-[32px] p-6 sm:p-8 md:p-10 min-h-[280px] sm:min-h-[320px] md:min-h-[350px] flex flex-col justify-between shadow-xl cursor-pointer reveal">
+                    class="service-card bg-[#5BA3FF] rounded-[32px] sm:rounded-[36px] p-7 sm:p-9 md:p-10 min-h-[320px] sm:min-h-[350px] md:min-h-[370px] flex flex-col justify-between shadow-xl cursor-pointer reveal">
                     <div>
-                        <h3 class="text-2xl sm:text-3xl md:text-4xl font-black italic text-white leading-tight">
+                        <h3 class="text-3xl sm:text-4xl md:text-[42px] font-black italic text-white tracking-tight leading-tight">
                             FAST<br>WEBSITES</h3>
                     </div>
-                    <div class="flex justify-center">
-                        <div
-                            class="service-icon w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 bg-white/30 rounded-2xl sm:rounded-3xl flex items-center justify-center">
-                            <div class="text-4xl sm:text-5xl md:text-6xl">🌐</div>
+                    <div class="flex justify-center pb-2">
+                        <div class="service-icon-wrapper">
+                            <img src="/icons/user_globe.png" alt="Fast Websites" class="w-28 h-28 sm:w-32 sm:h-32 object-contain drop-shadow-md select-none pointer-events-none" draggable="false">
                         </div>
                     </div>
                 </div>
 
-                <!-- WhatsApp Integration -->
+                <!-- 2. WhatsApp Integration (Green) -->
                 <div
-                    class="service-card bg-[#25D366] rounded-3xl sm:rounded-[32px] p-6 sm:p-8 md:p-10 min-h-[280px] sm:min-h-[320px] md:min-h-[350px] flex flex-col justify-between shadow-xl cursor-pointer sm:-translate-y-8 reveal">
-                    <div class="flex justify-center mb-4">
-                        <div class="service-icon">
-                            <i data-lucide="message-circle"
-                                class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 text-white/40"
-                                style="stroke-width: 1.5;"></i>
+                    class="service-card bg-[#25D366] rounded-[32px] sm:rounded-[36px] p-7 sm:p-9 md:p-10 min-h-[320px] sm:min-h-[350px] md:min-h-[370px] flex flex-col justify-between shadow-xl cursor-pointer reveal">
+                    <div class="flex justify-center pt-2">
+                        <div class="service-icon-wrapper">
+                            <img src="/icons/user_whatsapp.png" alt="WhatsApp Integration" class="w-24 h-24 sm:w-28 sm:h-28 object-contain select-none pointer-events-none" draggable="false">
                         </div>
                     </div>
                     <div>
-                        <h3 class="text-2xl sm:text-3xl md:text-4xl font-black italic text-gray-900 leading-tight">
+                        <h3 class="text-3xl sm:text-4xl md:text-[42px] font-black italic text-gray-950 tracking-tight leading-tight">
                             WHATSAPP<br>INTEGRATION</h3>
                     </div>
                 </div>
 
-                <!-- Call Buttons -->
+                <!-- 3. Call Buttons (Hot Magenta / Pink) -->
                 <div
-                    class="service-card bg-[#E60076] rounded-3xl sm:rounded-[32px] p-6 sm:p-8 md:p-10 min-h-[280px] sm:min-h-[320px] md:min-h-[350px] flex flex-col justify-between shadow-xl cursor-pointer reveal">
+                    class="service-card bg-[#E60076] rounded-[32px] sm:rounded-[36px] p-7 sm:p-9 md:p-10 min-h-[320px] sm:min-h-[350px] md:min-h-[370px] flex flex-col justify-between shadow-xl cursor-pointer reveal">
                     <div>
-                        <h3 class="text-2xl sm:text-3xl md:text-4xl font-black italic text-white leading-tight">
+                        <h3 class="text-3xl sm:text-4xl md:text-[42px] font-black italic text-white tracking-tight leading-tight">
                             CALL<br>BUTTONS</h3>
                     </div>
-                    <div class="flex justify-center">
-                        <div
-                            class="service-icon w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 bg-white/30 rounded-2xl sm:rounded-3xl flex items-center justify-center">
-                            <div class="text-4xl sm:text-5xl md:text-6xl">📞</div>
+                    <div class="flex justify-center pb-2">
+                        <div class="service-icon-wrapper">
+                            <img src="/icons/user_phone.png" alt="Call Buttons" class="w-24 h-24 sm:w-28 sm:h-28 object-contain drop-shadow-md select-none pointer-events-none" draggable="false">
                         </div>
                     </div>
                 </div>
 
-                <!-- Google Business -->
+                <!-- 4. Google Business (Yellow) -->
                 <div
-                    class="service-card bg-[#FFD520] rounded-3xl sm:rounded-[32px] p-6 sm:p-8 md:p-10 min-h-[280px] sm:min-h-[320px] md:min-h-[350px] flex flex-col justify-between shadow-xl cursor-pointer sm:-translate-y-8 reveal">
-                    <div class="flex justify-center mb-4">
-                        <div
-                            class="service-icon w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 bg-white/30 rounded-2xl sm:rounded-3xl flex items-center justify-center">
-                            <div class="text-4xl sm:text-5xl md:text-6xl">🔍</div>
+                    class="service-card bg-[#FFD520] rounded-[32px] sm:rounded-[36px] p-7 sm:p-9 md:p-10 min-h-[320px] sm:min-h-[350px] md:min-h-[370px] flex flex-col justify-between shadow-xl cursor-pointer reveal">
+                    <div class="flex justify-center pt-2">
+                        <div class="service-icon-wrapper">
+                            <img src="/icons/user_search.png" alt="Google Business" class="w-24 h-24 sm:w-28 sm:h-28 object-contain drop-shadow-md select-none pointer-events-none" draggable="false">
                         </div>
                     </div>
                     <div>
-                        <h3 class="text-2xl sm:text-3xl md:text-4xl font-black italic text-gray-900 leading-tight">
+                        <h3 class="text-3xl sm:text-4xl md:text-[42px] font-black italic text-gray-950 tracking-tight leading-tight">
                             GOOGLE<br>BUSINESS</h3>
                     </div>
                 </div>
 
-                <!-- Marketing Videos -->
+                <!-- 5. Marketing Videos (Orange) -->
                 <div
-                    class="service-card bg-[#FF6B35] rounded-3xl sm:rounded-[32px] p-6 sm:p-8 md:p-10 min-h-[280px] sm:min-h-[320px] md:min-h-[350px] flex flex-col justify-between shadow-xl cursor-pointer reveal">
+                    class="service-card bg-[#FF6B35] rounded-[32px] sm:rounded-[36px] p-7 sm:p-9 md:p-10 min-h-[320px] sm:min-h-[350px] md:min-h-[370px] flex flex-col justify-between shadow-xl cursor-pointer reveal">
                     <div>
-                        <h3 class="text-2xl sm:text-3xl md:text-4xl font-black italic text-white leading-tight">
+                        <h3 class="text-3xl sm:text-4xl md:text-[42px] font-black italic text-white tracking-tight leading-tight">
                             MARKETING<br>VIDEOS</h3>
                     </div>
-                    <div class="flex justify-center">
-                        <div
-                            class="service-icon w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 bg-white/30 rounded-2xl sm:rounded-3xl flex items-center justify-center">
-                            <div class="text-4xl sm:text-5xl md:text-6xl">🎬</div>
+                    <div class="flex justify-center pb-2">
+                        <div class="service-icon-wrapper">
+                            <img src="/icons/user_clapper.png" alt="Marketing Videos" class="w-24 h-24 sm:w-28 sm:h-28 object-contain drop-shadow-md select-none pointer-events-none" draggable="false">
                         </div>
                     </div>
                 </div>
 
-                <!-- 3D Videos -->
+                <!-- 6. 3D Videos (Lavender) -->
                 <div
-                    class="service-card bg-[#E4B3FF] rounded-3xl sm:rounded-[32px] p-6 sm:p-8 md:p-10 min-h-[280px] sm:min-h-[320px] md:min-h-[350px] flex flex-col justify-between shadow-xl cursor-pointer sm:-translate-y-8 reveal">
-                    <div class="flex justify-center mb-4">
-                        <div
-                            class="service-icon w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 bg-gradient-to-br from-[#FF6B35] to-[#E60076] rounded-2xl sm:rounded-3xl flex items-center justify-center shadow-xl">
-                            <div class="text-4xl sm:text-5xl md:text-6xl">✨</div>
+                    class="service-card bg-[#E4B3FF] rounded-[32px] sm:rounded-[36px] p-7 sm:p-9 md:p-10 min-h-[320px] sm:min-h-[350px] md:min-h-[370px] flex flex-col justify-between shadow-xl cursor-pointer reveal">
+                    <div class="flex justify-center pt-2">
+                        <div class="service-icon-wrapper">
+                            <img src="/icons/user_stars.png" alt="3D Videos" class="w-24 h-24 sm:w-28 sm:h-28 object-contain drop-shadow-md select-none pointer-events-none" draggable="false">
                         </div>
                     </div>
                     <div>
-                        <h3 class="text-2xl sm:text-3xl md:text-4xl font-black italic text-gray-900 leading-tight">
+                        <h3 class="text-3xl sm:text-4xl md:text-[42px] font-black italic text-gray-950 tracking-tight leading-tight">
                             3D<br>VIDEOS</h3>
                     </div>
                 </div>
@@ -704,97 +790,302 @@
                 </p>
             </div>
 
-            <!-- Creative Image Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-12 sm:mb-16 md:mb-20">
-                <!-- Image 1 -->
-                <div
-                    class="work-item relative h-[300px] sm:h-[400px] md:h-[500px] rounded-3xl sm:rounded-[32px] overflow-hidden shadow-2xl reveal">
-                    <img src="https://images.unsplash.com/photo-1632937145991-91620be68319?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600"
-                        alt="Creative workspace" class="w-full h-full object-cover">
-                    <div
-                        class="work-overlay absolute inset-0 bg-gradient-to-t from-[#FF6B35]/80 to-transparent flex items-end p-6 sm:p-8">
-                        <p class="text-white text-xl sm:text-2xl md:text-3xl font-black">CREATIVE DESIGNS</p>
+            <!-- Work Cards Grid with Interactive Solutions on Hover -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-12 sm:mb-16 md:mb-20 max-w-6xl mx-auto">
+                <!-- Card 1: TOPGEAR HQ (Royal Purple Theme) -->
+                <div class="work-card work-card-topgear border border-purple-500/30 reveal" onclick="this.classList.toggle('is-active')">
+                    <!-- Default State -->
+                    <div class="work-card-default bg-gradient-to-b from-[#170C2C] via-[#381559] to-[#681A9E]">
+                        <div></div>
+                        <div class="flex items-center justify-center py-12 px-6">
+                            <img src="/icons/work_topgear.png" alt="TOPGEAR HQ" class="max-h-24 sm:max-h-28 w-auto object-contain drop-shadow-xl select-none" draggable="false">
+                        </div>
+                        <div class="flex items-center justify-between pt-4 border-t border-white/10">
+                            <div>
+                                <h3 class="text-xl sm:text-2xl font-black text-white tracking-wide">TOPGEAR HQ</h3>
+                                <p class="text-[11px] font-semibold text-purple-200/80 tracking-widest uppercase mt-0.5">HOVER TO VIEW SOLUTIONS</p>
+                            </div>
+                            <div class="w-8 h-8 rounded-full bg-white/10 border border-white/15 flex items-center justify-center text-purple-200 shadow-inner">
+                                <i data-lucide="sparkles" class="w-4 h-4"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hover State (Delivered Solutions) -->
+                    <div class="work-card-hover">
+                        <!-- Top Header Row -->
+                        <div class="flex items-center justify-between gap-2 pb-2">
+                            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-white/20 shadow-inner">
+                                <span class="w-2 h-2 rounded-full bg-white/90"></span>
+                                <span class="text-[11px] font-black tracking-wider text-white uppercase">DELIVERED SOLUTIONS</span>
+                            </div>
+                            <span class="text-[10px] sm:text-[11px] font-bold tracking-wider text-purple-200 uppercase truncate">AUTOMOTIVE &amp; E-COMMERCE</span>
+                        </div>
+
+                        <!-- Solutions Capsules Stack -->
+                        <div class="space-y-3 my-auto py-2">
+                            <!-- Capsule 1 -->
+                            <div class="bg-black/35 backdrop-blur-md border border-white/15 rounded-2xl p-3.5 flex items-center justify-between shadow-lg">
+                                <div class="flex items-center gap-3 min-w-0">
+                                    <div class="w-10 h-10 rounded-xl bg-purple-600/35 border border-purple-400/30 flex items-center justify-center text-white flex-shrink-0 shadow-inner">
+                                        <i data-lucide="globe" class="w-5 h-5"></i>
+                                    </div>
+                                    <span class="text-sm sm:text-base font-bold text-white tracking-wide truncate">Website design and development</span>
+                                </div>
+                                <div class="w-5 h-5 rounded-full border border-teal-400/90 bg-teal-400/10 flex items-center justify-center text-teal-300 flex-shrink-0 ml-2">
+                                    <i data-lucide="check" class="w-3 h-3 stroke-[3]"></i>
+                                </div>
+                            </div>
+
+                            <!-- Capsule 2 -->
+                            <div class="bg-black/35 backdrop-blur-md border border-white/15 rounded-2xl p-3.5 flex items-center justify-between shadow-lg">
+                                <div class="flex items-center gap-3 min-w-0">
+                                    <div class="w-10 h-10 rounded-xl bg-purple-600/35 border border-purple-400/30 flex items-center justify-center text-white flex-shrink-0 shadow-inner">
+                                        <i data-lucide="shopping-cart" class="w-5 h-5"></i>
+                                    </div>
+                                    <span class="text-sm sm:text-base font-bold text-white tracking-wide truncate">Cart management</span>
+                                </div>
+                                <div class="w-5 h-5 rounded-full border border-teal-400/90 bg-teal-400/10 flex items-center justify-center text-teal-300 flex-shrink-0 ml-2">
+                                    <i data-lucide="check" class="w-3 h-3 stroke-[3]"></i>
+                                </div>
+                            </div>
+
+                            <!-- Capsule 3 -->
+                            <div class="bg-black/35 backdrop-blur-md border border-white/15 rounded-2xl p-3.5 flex items-center justify-between shadow-lg">
+                                <div class="flex items-center gap-3 min-w-0">
+                                    <div class="w-10 h-10 rounded-xl bg-purple-600/35 border border-purple-400/30 flex items-center justify-center text-white flex-shrink-0 shadow-inner">
+                                        <i data-lucide="message-circle" class="w-5 h-5"></i>
+                                    </div>
+                                    <span class="text-sm sm:text-base font-bold text-white tracking-wide truncate">WhatsApp inquiry</span>
+                                </div>
+                                <div class="w-5 h-5 rounded-full border border-teal-400/90 bg-teal-400/10 flex items-center justify-center text-teal-300 flex-shrink-0 ml-2">
+                                    <i data-lucide="check" class="w-3 h-3 stroke-[3]"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Bottom Row -->
+                        <div class="flex items-center justify-between pt-2 border-t border-white/10">
+                            <h3 class="text-xl sm:text-2xl font-black text-white tracking-tight">TOPGEAR HQ</h3>
+                            <a href="https://wa.me/918792359555?text=Hi,%20I%20am%20interested%20in%20solutions%20like%20Topgear%20HQ" target="_blank" class="bg-gradient-to-r from-[#9810FA] to-[#E60076] hover:brightness-110 text-white px-5 py-2.5 rounded-full text-xs sm:text-sm font-black flex items-center gap-1.5 shadow-lg shadow-purple-900/50 transform hover:scale-105 transition-all">
+                                Inquire <span class="text-sm font-bold">↗</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Image 2 - Video -->
-                <div
-                    class="work-item relative h-[300px] sm:h-[400px] md:h-[500px] rounded-3xl sm:rounded-[32px] overflow-hidden shadow-2xl bg-[#1673ff] reveal">
-                    <img src="https://images.unsplash.com/photo-1673767297196-ce9739933932?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600"
-                        alt="Video production" class="w-full h-full object-cover">
-                    <div
-                        class="work-overlay absolute inset-0 bg-gradient-to-t from-[#E60076]/80 to-transparent flex items-end p-6 sm:p-8">
-                        <p class="text-white text-xl sm:text-2xl md:text-3xl font-black">MARKETING VIDEOS</p>
+                <!-- Card 2: D24 STUDIO (Amber & Burnt Orange Theme) -->
+                <div class="work-card work-card-d24 border border-orange-500/30 reveal" onclick="this.classList.toggle('is-active')">
+                    <!-- Default State -->
+                    <div class="work-card-default bg-gradient-to-b from-[#22130E] via-[#57291A] to-[#9E3D18]">
+                        <div></div>
+                        <div class="flex items-center justify-center py-12 px-6">
+                            <img src="/icons/work_d24.png" alt="D24 STUDIO" class="max-h-24 sm:max-h-28 w-auto object-contain drop-shadow-[0_0_25px_rgba(255,100,50,0.5)] select-none" draggable="false">
+                        </div>
+                        <div class="flex items-center justify-between pt-4 border-t border-white/10">
+                            <div>
+                                <h3 class="text-xl sm:text-2xl font-black text-white tracking-wide">D24 STUDIO</h3>
+                                <p class="text-[11px] font-semibold text-orange-200/80 tracking-widest uppercase mt-0.5">HOVER TO VIEW SOLUTIONS</p>
+                            </div>
+                            <div class="w-8 h-8 rounded-full bg-white/10 border border-white/15 flex items-center justify-center text-orange-300 shadow-inner">
+                                <i data-lucide="sparkles" class="w-4 h-4"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hover State (Delivered Solutions) -->
+                    <div class="work-card-hover">
+                        <!-- Top Header Row -->
+                        <div class="flex items-center justify-between gap-2 pb-2">
+                            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-white/20 shadow-inner">
+                                <span class="w-2 h-2 rounded-full bg-white/90"></span>
+                                <span class="text-[11px] font-black tracking-wider text-white uppercase">DELIVERED SOLUTIONS</span>
+                            </div>
+                            <span class="text-[10px] sm:text-[11px] font-bold tracking-wider text-orange-200 uppercase truncate">CREATIVE &amp; 3D MEDIA</span>
+                        </div>
+
+                        <!-- Solutions Capsules Stack -->
+                        <div class="space-y-3 my-auto py-2">
+                            <!-- Capsule 1 -->
+                            <div class="bg-black/35 backdrop-blur-md border border-white/15 rounded-2xl p-3.5 flex items-center justify-between shadow-lg">
+                                <div class="flex items-center gap-3 min-w-0">
+                                    <div class="w-10 h-10 rounded-xl bg-orange-600/35 border border-orange-400/30 flex items-center justify-center text-white flex-shrink-0 shadow-inner">
+                                        <i data-lucide="film" class="w-5 h-5"></i>
+                                    </div>
+                                    <span class="text-sm sm:text-base font-bold text-white tracking-wide truncate">3D Anamorphic videos</span>
+                                </div>
+                                <div class="w-5 h-5 rounded-full border border-teal-400/90 bg-teal-400/10 flex items-center justify-center text-teal-300 flex-shrink-0 ml-2">
+                                    <i data-lucide="check" class="w-3 h-3 stroke-[3]"></i>
+                                </div>
+                            </div>
+
+                            <!-- Capsule 2 -->
+                            <div class="bg-black/35 backdrop-blur-md border border-white/15 rounded-2xl p-3.5 flex items-center justify-between shadow-lg">
+                                <div class="flex items-center gap-3 min-w-0">
+                                    <div class="w-10 h-10 rounded-xl bg-orange-600/35 border border-orange-400/30 flex items-center justify-center text-white flex-shrink-0 shadow-inner">
+                                        <i data-lucide="palette" class="w-5 h-5"></i>
+                                    </div>
+                                    <span class="text-sm sm:text-base font-bold text-white tracking-wide truncate">Brand identity &amp; visual motion</span>
+                                </div>
+                                <div class="w-5 h-5 rounded-full border border-teal-400/90 bg-teal-400/10 flex items-center justify-center text-teal-300 flex-shrink-0 ml-2">
+                                    <i data-lucide="check" class="w-3 h-3 stroke-[3]"></i>
+                                </div>
+                            </div>
+
+                            <!-- Capsule 3 -->
+                            <div class="bg-black/35 backdrop-blur-md border border-white/15 rounded-2xl p-3.5 flex items-center justify-between shadow-lg">
+                                <div class="flex items-center gap-3 min-w-0">
+                                    <div class="w-10 h-10 rounded-xl bg-orange-600/35 border border-orange-400/30 flex items-center justify-center text-white flex-shrink-0 shadow-inner">
+                                        <i data-lucide="sparkles" class="w-5 h-5"></i>
+                                    </div>
+                                    <span class="text-sm sm:text-base font-bold text-white tracking-wide truncate">Marketing video production</span>
+                                </div>
+                                <div class="w-5 h-5 rounded-full border border-teal-400/90 bg-teal-400/10 flex items-center justify-center text-teal-300 flex-shrink-0 ml-2">
+                                    <i data-lucide="check" class="w-3 h-3 stroke-[3]"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Bottom Row -->
+                        <div class="flex items-center justify-between pt-2 border-t border-white/10">
+                            <h3 class="text-xl sm:text-2xl font-black text-white tracking-tight">D24 STUDIO</h3>
+                            <a href="https://wa.me/918792359555?text=Hi,%20I%20am%20interested%20in%20solutions%20like%20D24%20Studio" target="_blank" class="bg-gradient-to-r from-[#EA580C] to-[#E60076] hover:brightness-110 text-white px-5 py-2.5 rounded-full text-xs sm:text-sm font-black flex items-center gap-1.5 shadow-lg shadow-orange-950/50 transform hover:scale-105 transition-all">
+                                Inquire <span class="text-sm font-bold">↗</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Image 3 -->
-                <div
-                    class="work-item relative h-[300px] sm:h-[400px] md:h-[500px] rounded-3xl sm:rounded-[32px] overflow-hidden shadow-2xl reveal">
-                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600"
-                        alt="Web development" class="w-full h-full object-cover">
-                    <div
-                        class="work-overlay absolute inset-0 bg-gradient-to-t from-[#9810FA]/80 to-transparent flex items-end p-6 sm:p-8">
-                        <p class="text-white text-xl sm:text-2xl md:text-3xl font-black">WEB DEVELOPMENT</p>
+                <!-- Card 3: SR GROUP (Sapphire Blue Theme) -->
+                <div class="work-card work-card-srgroup border border-blue-500/30 reveal" onclick="this.classList.toggle('is-active')">
+                    <!-- Default State -->
+                    <div class="work-card-default bg-gradient-to-b from-[#07172E] via-[#0B2B5A] to-[#0E489E]">
+                        <div></div>
+                        <div class="flex items-center justify-center py-12 px-6">
+                            <img src="/icons/work_srgroup.png" alt="SR GROUP" class="max-h-20 sm:max-h-24 w-auto object-contain drop-shadow-[0_0_20px_rgba(56,189,248,0.4)] select-none" draggable="false">
+                        </div>
+                        <div class="flex items-center justify-between pt-4 border-t border-white/10">
+                            <div>
+                                <h3 class="text-xl sm:text-2xl font-black text-white tracking-wide">SR GROUP</h3>
+                                <p class="text-[11px] font-semibold text-blue-200/80 tracking-widest uppercase mt-0.5">HOVER TO VIEW SOLUTIONS</p>
+                            </div>
+                            <div class="w-8 h-8 rounded-full bg-white/10 border border-white/15 flex items-center justify-center text-blue-300 shadow-inner">
+                                <i data-lucide="sparkles" class="w-4 h-4"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hover State (Delivered Solutions) -->
+                    <div class="work-card-hover">
+                        <!-- Top Header Row -->
+                        <div class="flex items-center justify-between gap-2 pb-2">
+                            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-white/20 shadow-inner">
+                                <span class="w-2 h-2 rounded-full bg-white/90"></span>
+                                <span class="text-[11px] font-black tracking-wider text-white uppercase">DELIVERED SOLUTIONS</span>
+                            </div>
+                            <span class="text-[10px] sm:text-[11px] font-bold tracking-wider text-blue-200 uppercase truncate">CORPORATE &amp; ENTERPRISE</span>
+                        </div>
+
+                        <!-- Solutions Capsules Stack -->
+                        <div class="space-y-3 my-auto py-2">
+                            <!-- Capsule 1 -->
+                            <div class="bg-black/35 backdrop-blur-md border border-white/15 rounded-2xl p-3.5 flex items-center justify-between shadow-lg">
+                                <div class="flex items-center gap-3 min-w-0">
+                                    <div class="w-10 h-10 rounded-xl bg-blue-600/35 border border-blue-400/30 flex items-center justify-center text-white flex-shrink-0 shadow-inner">
+                                        <i data-lucide="monitor" class="w-5 h-5"></i>
+                                    </div>
+                                    <span class="text-sm sm:text-base font-bold text-white tracking-wide truncate">High-converting corporate website</span>
+                                </div>
+                                <div class="w-5 h-5 rounded-full border border-teal-400/90 bg-teal-400/10 flex items-center justify-center text-teal-300 flex-shrink-0 ml-2">
+                                    <i data-lucide="check" class="w-3 h-3 stroke-[3]"></i>
+                                </div>
+                            </div>
+
+                            <!-- Capsule 2 -->
+                            <div class="bg-black/35 backdrop-blur-md border border-white/15 rounded-2xl p-3.5 flex items-center justify-between shadow-lg">
+                                <div class="flex items-center gap-3 min-w-0">
+                                    <div class="w-10 h-10 rounded-xl bg-blue-600/35 border border-blue-400/30 flex items-center justify-center text-white flex-shrink-0 shadow-inner">
+                                        <i data-lucide="search" class="w-5 h-5"></i>
+                                    </div>
+                                    <span class="text-sm sm:text-base font-bold text-white tracking-wide truncate">Google Business optimization</span>
+                                </div>
+                                <div class="w-5 h-5 rounded-full border border-teal-400/90 bg-teal-400/10 flex items-center justify-center text-teal-300 flex-shrink-0 ml-2">
+                                    <i data-lucide="check" class="w-3 h-3 stroke-[3]"></i>
+                                </div>
+                            </div>
+
+                            <!-- Capsule 3 -->
+                            <div class="bg-black/35 backdrop-blur-md border border-white/15 rounded-2xl p-3.5 flex items-center justify-between shadow-lg">
+                                <div class="flex items-center gap-3 min-w-0">
+                                    <div class="w-10 h-10 rounded-xl bg-blue-600/35 border border-blue-400/30 flex items-center justify-center text-white flex-shrink-0 shadow-inner">
+                                        <i data-lucide="phone-call" class="w-5 h-5"></i>
+                                    </div>
+                                    <span class="text-sm sm:text-base font-bold text-white tracking-wide truncate">Direct WhatsApp &amp; call routing</span>
+                                </div>
+                                <div class="w-5 h-5 rounded-full border border-teal-400/90 bg-teal-400/10 flex items-center justify-center text-teal-300 flex-shrink-0 ml-2">
+                                    <i data-lucide="check" class="w-3 h-3 stroke-[3]"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Bottom Row -->
+                        <div class="flex items-center justify-between pt-2 border-t border-white/10">
+                            <h3 class="text-xl sm:text-2xl font-black text-white tracking-tight">SR GROUP</h3>
+                            <a href="https://wa.me/918792359555?text=Hi,%20I%20am%20interested%20in%20solutions%20like%20SR%20Group" target="_blank" class="bg-gradient-to-r from-[#1673ff] to-[#06B6D4] hover:brightness-110 text-white px-5 py-2.5 rounded-full text-xs sm:text-sm font-black flex items-center gap-1.5 shadow-lg shadow-blue-950/50 transform hover:scale-105 transition-all">
+                                Inquire <span class="text-sm font-bold">↗</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- TTTT Interactive Component -->
+            <!-- ERIP Interactive Component (Core Values / Testimonials) -->
             <div
-                class="tttt-container h-[400px] lg:h-[600px] rounded-3xl sm:rounded-[48px] overflow-hidden shadow-2xl mb-12 sm:mb-16 md:mb-20 flex flex-col lg:flex-row reveal">
-                <!-- Section 1 - Orange -->
-                <div class="tttt-section" style="background-color: #ff8c00;">
-                    <div class="absolute inset-0 flex items-center justify-center">
-                        <div class="w-full h-full flex items-center justify-center">
-                            <span class="tttt-letter" style="color: #000000;">T</span>
-                        </div>
+                class="tttt-container h-[520px] sm:h-[580px] md:h-[520px] lg:h-[620px] rounded-[32px] sm:rounded-[38px] md:rounded-[48px] overflow-hidden shadow-2xl mb-12 sm:mb-16 md:mb-20 flex flex-col md:flex-row reveal">
+                <!-- Section 1 - Orange: E (Exceptional) -->
+                <div class="tttt-section" style="background-color: #f58a27;">
+                    <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                        <span class="tttt-letter font-black" style="color: #000000;">E</span>
                     </div>
-                    <div class="absolute bottom-4 left-4 lg:bottom-8 lg:left-8">
-                        <div class="bg-white rounded-2xl px-4 py-2 lg:px-6 lg:py-3 shadow-lg">
-                            <span class="text-lg lg:text-2xl font-bold text-gray-900">ES</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Section 2 - Blue -->
-                <div class="tttt-section" style="background-color: #1e90ff;">
-                    <div class="absolute inset-0 flex items-center justify-center">
-                        <div class="w-full h-full flex items-center justify-center">
-                            <span class="tttt-letter" style="color: #000000;">T</span>
-                        </div>
-                    </div>
-                    <div class="absolute bottom-4 left-4 lg:bottom-8 lg:left-8">
-                        <div class="bg-white rounded-2xl px-4 py-2 lg:px-6 lg:py-3 shadow-lg">
-                            <span class="text-lg lg:text-2xl font-bold text-gray-900">IM</span>
+                    <div class="absolute left-4 sm:left-6 top-1/2 -translate-y-1/2 md:top-auto md:translate-y-0 md:bottom-6 md:left-6 lg:bottom-8 lg:left-8 z-10">
+                        <div class="bg-white rounded-2xl px-3.5 py-1.5 sm:px-4 sm:py-2 md:px-4 md:py-2 lg:px-5 lg:py-2.5 shadow-md md:shadow-lg flex items-center justify-center select-none">
+                            <span class="text-xs sm:text-sm md:text-base lg:text-lg font-black text-gray-950 tracking-wide whitespace-nowrap">Exceptional</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Section 3 - Grey -->
+                <!-- Section 2 - Blue: R (Reliable) -->
+                <div class="tttt-section" style="background-color: #1673ff;">
+                    <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                        <span class="tttt-letter font-black" style="color: #000000;">R</span>
+                    </div>
+                    <div class="absolute left-4 sm:left-6 top-1/2 -translate-y-1/2 md:top-auto md:translate-y-0 md:bottom-6 md:left-6 lg:bottom-8 lg:left-8 z-10">
+                        <div class="bg-white rounded-2xl px-3.5 py-1.5 sm:px-4 sm:py-2 md:px-4 md:py-2 lg:px-5 lg:py-2.5 shadow-md md:shadow-lg flex items-center justify-center select-none">
+                            <span class="text-xs sm:text-sm md:text-base lg:text-lg font-black text-gray-950 tracking-wide whitespace-nowrap">Reliable</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 3 - Grey: I (Innovative) -->
                 <div class="tttt-section" style="background-color: #c4c4c4;">
-                    <div class="absolute inset-0 flex items-center justify-center">
-                        <div class="w-full h-full flex items-center justify-center">
-                            <span class="tttt-letter" style="color: #000000;">O</span>
-                        </div>
+                    <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                        <span class="tttt-letter font-black" style="color: #000000;">I</span>
                     </div>
-                    <div class="absolute bottom-4 left-4 lg:bottom-8 lg:left-8">
-                        <div class="bg-white rounded-2xl px-4 py-2 lg:px-6 lg:py-3 shadow-lg">
-                            <span class="text-lg lg:text-2xl font-bold text-gray-900">NI</span>
+                    <div class="absolute left-4 sm:left-6 top-1/2 -translate-y-1/2 md:top-auto md:translate-y-0 md:bottom-6 md:left-6 lg:bottom-8 lg:left-8 z-10">
+                        <div class="bg-white rounded-2xl px-3.5 py-1.5 sm:px-4 sm:py-2 md:px-4 md:py-2 lg:px-5 lg:py-2.5 shadow-md md:shadow-lg flex items-center justify-center select-none">
+                            <span class="text-xs sm:text-sm md:text-base lg:text-lg font-black text-gray-950 tracking-wide whitespace-nowrap">Innovative</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Section 4 - Cream -->
+                <!-- Section 4 - Cream: P (Professional) -->
                 <div class="tttt-section" style="background-color: #f5e6d3;">
-                    <div class="absolute inset-0 flex items-center justify-center">
-                        <div class="w-full h-full flex items-center justify-center">
-                            <span class="tttt-letter" style="color: #3D2800;">A</span>
-                        </div>
+                    <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                        <span class="tttt-letter font-black" style="color: #3D2800;">P</span>
                     </div>
-                    <div class="absolute bottom-4 left-4 lg:bottom-8 lg:left-8">
-                        <div class="bg-white rounded-2xl px-4 py-2 lg:px-6 lg:py-3 shadow-lg">
-                            <span class="text-lg lg:text-2xl font-bold text-gray-900">LS</span>
+                    <div class="absolute left-4 sm:left-6 top-1/2 -translate-y-1/2 md:top-auto md:translate-y-0 md:bottom-6 md:left-6 lg:bottom-8 lg:left-8 z-10">
+                        <div class="bg-white rounded-2xl px-3.5 py-1.5 sm:px-4 sm:py-2 md:px-4 md:py-2 lg:px-5 lg:py-2.5 shadow-md md:shadow-lg flex items-center justify-center select-none">
+                            <span class="text-xs sm:text-sm md:text-base lg:text-lg font-black text-gray-950 tracking-wide whitespace-nowrap">Professional</span>
                         </div>
                     </div>
                 </div>
